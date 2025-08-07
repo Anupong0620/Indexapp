@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรเจกต์รวม</title>
+    <style>
+        /* --- General Styles --- */
+        body {
+            font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ที่อ่านง่าย */
+            background-color: #f4f7f9; /* สีพื้นหลังสบายตา */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* --- Main Container --- */
+        .main-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        /* --- Header --- */
+        header h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* --- Layout for Columns --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* จัดคอลัมน์แบบยืดหยุ่น */
+            gap: 30px; /* ระยะห่างระหว่างคอลัมน์ */
+        }
+
+        /* --- Column/Card Style --- */
+        .project-column {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-column:hover {
+            transform: translateY(-5px); /* เพิ่ม animation ตอนเอาเมาส์ชี้ */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-column h2 {
+            color: #34495e;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+
+        /* --- Link/Button Style --- */
+        .project-link {
+            display: block;
+            background-color: #3498db; /* สีปุ่มหลัก */
+            color: #ffffff;
+            padding: 15px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .project-link:hover {
+            background-color: #2980b9; /* สีปุ่มเมื่อเอาเมาส์ชี้ */
+        }
+        
+        /* เปลี่ยนสีปุ่มในหมวด Warfarin ให้แตกต่าง */
+        .warfarin-section .project-link {
+            background-color: #e74c3c;
+        }
+        
+        .warfarin-section .project-link:hover {
+            background-color: #c0392b;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main-container">
+        <header>
+            <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
+        </header>
+
+        <main class="project-grid">
+            <div class="project-column warfarin-section">
+                <h2>💊 Warfarin</h2>
+                <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" class="project-link">
+                    Warfarin Pharmacist Note
+                </a>
+                <a href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank" class="project-link">
+                    Warfarin Double Check
+                </a>
+            </div>
+
+            <div class="project-column">
+                <h2>💰 ราคาขายยา รพ.รัฐ</h2>
+                <a href="https://anupong0620.github.io/Price-Check/" target="_blank" class="project-link">
+                    ตรวจสอบราคาขายยา
+                </a>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

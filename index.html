@@ -7,8 +7,8 @@
     <style>
         /* --- General Styles --- */
         body {
-            font-family: 'Sarabun', sans-serif; /* ใช้ฟอนต์ที่อ่านง่าย */
-            background-color: #f4f7f9; /* สีพื้นหลังสบายตา */
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f9;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,23 +18,18 @@
         }
 
         /* --- Main Container --- */
-        .main-container {
-            width: 100%;
-            max-width: 1200px;
-        }
+        .main-container { width: 100%; max-width: 1200px; }
         
         /* --- Header --- */
         header h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 40px;
+            color: #2c3e50; text-align: center; margin-bottom: 40px;
         }
 
         /* --- Layout for Columns --- */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* จัดคอลัมน์แบบยืดหยุ่น */
-            gap: 30px; /* ระยะห่างระหว่างคอลัมน์ */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         /* --- Column/Card Style --- */
@@ -45,47 +40,31 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .project-column:hover {
-            transform: translateY(-5px); /* เพิ่ม animation ตอนเอาเมาส์ชี้ */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        }
-
+        .project-column:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
         .project-column h2 {
-            color: #34495e;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 15px;
-            margin-top: 0;
+            color: #34495e; border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px; margin-top: 0;
         }
+        .project-column p { margin: 10px 0 0; color:#546e7a; }
 
         /* --- Link/Button Style --- */
         .project-link {
-            display: block;
-            background-color: #3498db; /* สีปุ่มหลัก */
-            color: #ffffff;
-            padding: 15px 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
+            display: block; background-color: #3498db; color: #ffffff;
+            padding: 15px 20px; margin-top: 20px; border-radius: 8px;
+            text-decoration: none; text-align: center; font-weight: bold;
             transition: background-color 0.3s ease;
         }
+        .project-link:hover { background-color: #2980b9; }
 
-        .project-link:hover {
-            background-color: #2980b9; /* สีปุ่มเมื่อเอาเมาส์ชี้ */
-        }
-        
-        /* เปลี่ยนสีปุ่มในหมวด Warfarin ให้แตกต่าง */
-        .warfarin-section .project-link {
-            background-color: #e74c3c;
-        }
-        
-        .warfarin-section .project-link:hover {
-            background-color: #c0392b;
-        }
+        /* Warfarin สีเฉพาะ */
+        .warfarin-section .project-link { background-color: #e74c3c; }
+        .warfarin-section .project-link:hover { background-color: #c0392b; }
 
+        /* Drug Allergy สีเฉพาะ */
+        .allergy-section .project-link { background-color: #10b981; }
+        .allergy-section .project-link:hover { background-color: #059669; }
     </style>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
@@ -98,6 +77,15 @@
         </header>
 
         <main class="project-grid">
+            <!-- ✅ NEW: Drug Allergy Backup -->
+            <div class="project-column allergy-section">
+                <h2>🧬 Drug Allergy (Backup)</h2>
+                <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
+                <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" class="project-link">
+                    เปิด Drug Allergy Backup
+                </a>
+            </div>
+
             <div class="project-column warfarin-section">
                 <h2>💊 Warfarin</h2>
                 <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" class="project-link">

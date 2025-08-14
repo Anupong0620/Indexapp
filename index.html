@@ -1,134 +1,109 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CTK Med Hub • ศูนย์รวมเครื่องมือโรงพยาบาลชาติตระการ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b1220; --ink:#e5e7eb; --muted:#9aa4b2; --card:#0f172a; --line:#1f2937;
-      --accent:#22d3ee; --accent-2:#8b5cf6; --ok:#10b981; --warn:#f59e0b; --danger:#ef4444;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:'Sarabun',system-ui, sans-serif; color:var(--ink);
-      background:
-        radial-gradient(1200px 600px at -10% -10%, #0d1b2a 25%, transparent 65%),
-        radial-gradient(1000px 600px at 120% 0%, #0a1628 25%, transparent 65%),
-        var(--bg);
-      padding:24px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรเจกต์รวม</title>
+    <style>
+        /* --- General Styles --- */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f7f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
 
-    /* Header / Hero */
-    .hero{
-      max-width:1100px; margin:0 auto 28px; padding:22px; border-radius:18px;
-      background:linear-gradient(135deg, rgba(34,211,238,.12), rgba(139,92,246,.12));
-      border:1px solid rgba(255,255,255,.09);
-      display:flex; align-items:center; gap:18px; flex-wrap:wrap;
-      box-shadow:0 18px 50px rgba(0,0,0,.30);
-    }
-    .hero .brand{display:flex; align-items:center; gap:14px}
-    .logo{width:56px;height:56px;border-radius:14px;object-fit:contain;background:#0b1120;border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 24px rgba(34,211,238,.25), inset 0 0 0 2px rgba(139,92,246,.35)}
-    .title{font-weight:700; font-size:22px}
-    $1
-    .credit-mini{color:var(--muted);font-size:13px;margin-top:4px}
+        /* --- Main Container --- */
+        .main-container { width: 100%; max-width: 1200px; }
+        
+        /* --- Header --- */
+        header h1 {
+            color: #2c3e50; text-align: center; margin-bottom: 40px;
+        }
 
-    /* Grid */
-    .grid{max-width:1100px; margin:0 auto; display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+        /* --- Layout for Columns --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    /* Card */
-    .card{
-      background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px;
-      padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.25); display:flex; flex-direction:column; gap:12px;
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .card:hover{ transform: translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.35); }
-    .card h2{ margin:0; font-size:18px; display:flex; align-items:center; gap:8px }
-    .desc{ color:var(--muted); margin:0 }
-    .chips{ display:flex; gap:8px; flex-wrap:wrap }
-    .chip{ font-size:12px; padding:4px 8px; border-radius:999px; border:1px solid #223; background:#0b1120; color:#cbd5e1 }
-    .chip.ok{ border-color: rgba(16,185,129,.35); background:rgba(16,185,129,.12); color:#a7f3d0 }
-    .chip.warn{ border-color: rgba(245,158,11,.35); background:rgba(245,158,11,.12); color:#fde68a }
-    .actions{ display:flex; gap:10px; margin-top:auto }
-    .btn{ flex:1; text-align:center; text-decoration:none; font-weight:700; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,.12); color:white; }
-    .btn:hover{ filter:brightness(1.08) }
-    .btn.main{ background:linear-gradient(135deg, var(--accent), var(--accent-2)) }
-    .btn.alt{ background:#1f2937 }
+        /* --- Column/Card Style --- */
+        .project-column {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-column:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
+        .project-column h2 {
+            color: #34495e; border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px; margin-top: 0;
+        }
+        .project-column p { margin: 10px 0 0; color:#546e7a; }
 
-    footer{max-width:1100px;margin:18px auto 0; color:var(--muted); font-size:13px; text-align:center}
-  </style>
+        /* --- Link/Button Style --- */
+        .project-link {
+            display: block; background-color: #3498db; color: #ffffff;
+            padding: 15px 20px; margin-top: 20px; border-radius: 8px;
+            text-decoration: none; text-align: center; font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .project-link:hover { background-color: #2980b9; }
+
+        /* Warfarin สีเฉพาะ */
+        .warfarin-section .project-link { background-color: #e74c3c; }
+        .warfarin-section .project-link:hover { background-color: #c0392b; }
+
+        /* Drug Allergy สีเฉพาะ */
+        .allergy-section .project-link { background-color: #10b981; }
+        .allergy-section .project-link:hover { background-color: #059669; }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="hero">
-    <div class="brand">
-      <img src="logo.png" alt="Hospital logo" class="logo" onerror="this.style.display='none'"/>
-      <div>
-        <div class="title">CTK Med Hub</div>
-        $1
-        <div class="credit-mini">จัดทำโดย <b>ฝ่ายเภสัชกรรมและคุ้มครองผู้บริโภค</b></div>
-      </div>
+
+    <div class="main-container">
+        <header>
+            <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
+        </header>
+
+        <main class="project-grid">
+            <!-- ✅ NEW: Drug Allergy Backup -->
+            <div class="project-column allergy-section">
+                <h2>🧬 Drug Allergy (Backup)</h2>
+                <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
+                <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" class="project-link">
+                    เปิด Drug Allergy Backup
+                </a>
+            </div>
+
+            <div class="project-column warfarin-section">
+                <h2>💊 Warfarin</h2>
+                <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" class="project-link">
+                    Warfarin Pharmacist Note
+                </a>
+                <a href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank" class="project-link">
+                    Warfarin Double Check
+                </a>
+            </div>
+
+            <div class="project-column">
+                <h2>💰 ราคาขายยา รพ.รัฐ</h2>
+                <a href="https://anupong0620.github.io/Price-Check/" target="_blank" class="project-link">
+                    ตรวจสอบราคาขายยา
+                </a>
+            </div>
+        </main>
     </div>
-  </header>
 
-  <main class="grid">
-    <!-- Drug Allergy Backup -->
-    $1
-        <a class="btn main" href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank">เปิดระบบ Drug Allergy</a>
-      $2
-    </section>
-
-    <!-- Warfarin Tools -->
-    <section class="card">
-      <h2>💊 Warfarin</h2>
-      <p class="desc">บันทึกการดูแลและตรวจสอบยาซ้ำซ้อน สำหรับผู้ป่วยใช้ Warfarin</p>
-      <div class="actions">
-        <a class="btn alt" href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank">Pharmacist Note</a>
-        <a class="btn alt" href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank">Double Check</a>
-      </div>
-    </section>
-
-    <!-- Price Checker -->
-    <section class="card">
-      <h2>💰 ราคาขายยา รพ.รัฐ</h2>
-      <p class="desc">ตรวจสอบราคาขายยาย้อนหลังและเทียบหน่วยบริการภาครัฐ</p>
-      <div class="actions">
-        <a class="btn alt" href="https://anupong0620.github.io/Price-Check/" target="_blank">เปิดเครื่องมือราคา</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    จัดทำโดย ฝ่ายเภสัชกรรมและคุ้มครองผู้บริโภค • โรงพยาบาลชาติตระการ
-  </footer>
-
-  <script>
-    // ดึงสถานะล่าสุดของ Drug Allergy จากไฟล์ JSON ใน repo สำรอง
-    const DATA_URL = 'https://anupong0620.github.io/drug-allergy-backup/allergy.json';
-
-    async function loadAllergyStatus(){
-      // ลองดึง Last-Modified จาก HEAD ก่อน
-      try {
-        const head = await fetch(DATA_URL, { method:'HEAD', cache:'no-store' });
-        const lm = head.headers.get('last-modified');
-        if(lm){ document.getElementById('allergyUpdated').textContent = new Date(lm).toLocaleString('th-TH'); }
-      } catch {}
-
-      try {
-        const res = await fetch(DATA_URL, { cache:'no-store' });
-        const arr = await res.json();
-        document.getElementById('allergyCount').textContent = (Array.isArray(arr)?arr.length:0).toLocaleString('th-TH');
-        if(!document.getElementById('allergyUpdated').textContent.trim()){
-          // ถ้าไม่ได้ Last-Modified จาก HEAD ให้ใช้เวลาปัจจุบันแสดงแทน (ประมาณ)
-          document.getElementById('allergyUpdated').textContent = new Date().toLocaleString('th-TH');
-        }
-      } catch(e){ /* เงียบไว้พอประมาณ */ }
-    }
-
-    loadAllergyStatus();
-  </script>
 </body>
 </html>

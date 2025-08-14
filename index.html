@@ -32,9 +32,10 @@
       box-shadow:0 18px 50px rgba(0,0,0,.30);
     }
     .hero .brand{display:flex; align-items:center; gap:14px}
-    .logo{width:44px;height:44px;border-radius:12px;object-fit:contain;background:#0b1120;border:1px solid rgba(255,255,255,.12)}
+    .logo{width:56px;height:56px;border-radius:14px;object-fit:contain;background:#0b1120;border:1px solid rgba(255,255,255,.16);box-shadow:0 8px 24px rgba(34,211,238,.25), inset 0 0 0 2px rgba(139,92,246,.35)}
     .title{font-weight:700; font-size:22px}
-    .subtitle{color:var(--muted)}
+    $1
+    .credit-mini{color:var(--muted);font-size:13px;margin-top:4px}
 
     /* Grid */
     .grid{max-width:1100px; margin:0 auto; display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
@@ -67,25 +68,17 @@
       <img src="logo.png" alt="Hospital logo" class="logo" onerror="this.style.display='none'"/>
       <div>
         <div class="title">CTK Med Hub</div>
-        <div class="subtitle">ศูนย์รวมเครื่องมือออนไลน์ • โรงพยาบาลชาติตระการ</div>
+        $1
+        <div class="credit-mini">จัดทำโดย <b>ฝ่ายเภสัชกรรมและคุ้มครองผู้บริโภค</b></div>
       </div>
     </div>
   </header>
 
   <main class="grid">
     <!-- Drug Allergy Backup -->
-    <section class="card" id="allergyCard">
-      <h2>🧬 Drug Allergy (Backup)</h2>
-      <p class="desc">เครื่องมือตรวจสอบประวัติแพ้ยา (รองรับออฟไลน์ / ใช้ได้แม้ไฟดับ) • ต้องกรอกรหัสก่อนเข้าใช้งาน</p>
-      <div class="chips">
-        <span class="chip" title="จำนวนรายการ"><span id="allergyCount">—</span> รายการ</span>
-        <span class="chip" title="อัปเดต">อัปเดต: <span id="allergyUpdated">—</span></span>
-        <span class="chip ok">พร้อมใช้งาน</span>
-      </div>
-      <div class="actions">
+    $1
         <a class="btn main" href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank">เปิดระบบ Drug Allergy</a>
-        <a class="btn alt" href="https://anupong0620.github.io/drug-allergy-backup/archive/" target="_blank">ดูไฟล์สำรอง</a>
-      </div>
+      $2
     </section>
 
     <!-- Warfarin Tools -->

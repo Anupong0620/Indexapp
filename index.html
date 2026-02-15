@@ -6,7 +6,6 @@
   <title>โปรเจกต์รวม</title>
 
   <style>
-    /* --- General Styles --- */
     body{
       font-family:'Sarabun',sans-serif;
       background-color:#f4f7f9;
@@ -17,56 +16,89 @@
       align-items:flex-start;
       min-height:100vh;
     }
-
-    /* --- Main Container --- */
     .main-container{ width:100%; max-width:1200px; }
 
-    /* --- Header --- */
     header h1{
       color:#2c3e50;
       text-align:center;
-      margin-bottom:40px;
+      margin-bottom:8px;
+    }
+    .hint{
+      text-align:center;
+      margin:0 0 28px;
+      color:#607d8b;
+      font-size:14px;
+    }
+    .hint kbd{
+      background:#e9eef3;
+      border:1px solid #d6dee7;
+      border-bottom-width:2px;
+      padding:2px 6px;
+      border-radius:6px;
+      font-family:inherit;
+      font-size:12px;
     }
 
-    /* --- Layout for Cards --- */
     .project-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
       gap:30px;
     }
 
-    /* --- Card Style --- */
     .project-column{
       background-color:#ffffff;
       border-radius:12px;
-      padding:25px;
+      padding:18px 22px 22px;
       box-shadow:0 4px 12px rgba(0,0,0,0.08);
       transition:transform 0.25s ease, box-shadow 0.25s ease;
-      cursor:grab;
       user-select:none;
       -webkit-user-select:none;
-      touch-action:manipulation;
     }
     .project-column:hover{
       transform:translateY(-5px);
       box-shadow:0 8px 20px rgba(0,0,0,0.12);
     }
-    .project-column:active{ cursor:grabbing; }
+
+    /* ===== Drag Handle (จับลากตรงนี้เท่านั้น) ===== */
+    .drag-handle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      margin:-6px -10px 12px;
+      border-radius:10px;
+      background:#f2f6fb;
+      border:1px solid #e2e8f0;
+      cursor:grab;
+    }
+    .drag-handle:active{ cursor:grabbing; }
+    .drag-icon{
+      font-size:18px;
+      line-height:1;
+      color:#607d8b;
+    }
+    .drag-text{
+      font-size:12px;
+      color:#78909c;
+      margin-left:auto;
+      white-space:nowrap;
+    }
+
     .project-column h2{
       color:#34495e;
       border-bottom:2px solid #e0e0e0;
-      padding-bottom:15px;
-      margin-top:0;
+      padding-bottom:12px;
+      margin:0;
     }
     .project-column p{ margin:10px 0 0; color:#546e7a; }
 
-    /* --- Link/Button Style --- */
     .project-link{
       display:block;
       background-color:#3498db;
       color:#ffffff;
       padding:15px 20px;
-      margin-top:20px;
+      margin-top:18px;
       border-radius:8px;
       text-decoration:none;
       text-align:center;
@@ -76,20 +108,12 @@
     .project-link:hover{ background-color:#2980b9; }
     .project-link:active{ transform:scale(0.99); }
 
-    /* --- Sortable states --- */
-    .sortable-ghost{
-      opacity:0.35;
-      transform:none !important;
-    }
-    .sortable-chosen{
-      box-shadow:0 14px 28px rgba(0,0,0,0.18) !important;
-      transform:translateY(-2px) scale(1.01) !important;
-    }
-    .sortable-drag{
-      cursor:grabbing !important;
-    }
+    /* Sortable classes */
+    .sortable-ghost{ opacity:0.35; transform:none !important; }
+    .sortable-chosen{ box-shadow:0 14px 28px rgba(0,0,0,0.18) !important; }
+    .sortable-drag{ cursor:grabbing !important; }
 
-    /* --- Section Colors --- */
+    /* สีเฉพาะ */
     .warfarin-section .project-link{ background-color:#e74c3c; }
     .warfarin-section .project-link:hover{ background-color:#c0392b; }
 
@@ -110,23 +134,6 @@
 
     .vaccine-section .project-link{ background-color:#17a2b8; }
     .vaccine-section .project-link:hover{ background-color:#138496; }
-
-    /* --- Small hint text --- */
-    .hint{
-      text-align:center;
-      margin:-20px 0 25px;
-      color:#607d8b;
-      font-size:14px;
-    }
-    .hint kbd{
-      background:#e9eef3;
-      border:1px solid #d6dee7;
-      border-bottom-width:2px;
-      padding:2px 6px;
-      border-radius:6px;
-      font-family:inherit;
-      font-size:12px;
-    }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -141,73 +148,102 @@
   <div class="main-container">
     <header>
       <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
-      <div class="hint">ลากการ์ดเพื่อจัดลำดับใหม่ได้ทันที (ระบบจะ <b>จำลำดับ</b> ให้) • ทิป: ค้างแล้วลาก / ใช้ <kbd>Touch</kbd> บนมือถือได้</div>
+      <div class="hint">ลาก “แถบจับ” ด้านบนของแต่ละการ์ดเพื่อจัดลำดับใหม่ (จำลำดับอัตโนมัติ) • มือถือ: <kbd>แตะค้าง</kbd> แล้วลาก</div>
     </header>
 
     <main class="project-grid" id="projectGrid">
 
       <div class="project-column allergy-section" data-id="drug-allergy-backup">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span>
+          <span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>🧬 Drug Allergy (Backup)</h2>
         <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
         <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" rel="noopener" class="project-link">เปิด Drug Allergy Backup</a>
       </div>
 
       <div class="project-column warfarin-section" data-id="warfarin">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>💊 Warfarin</h2>
         <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" rel="noopener" class="project-link">Warfarin Pharmacist Note</a>
         <a href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank" rel="noopener" class="project-link">Warfarin Double Check</a>
       </div>
 
       <div class="project-column pharmareuse-section" data-id="pharmareuse">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>♻️ PharmaReuse</h2>
         <p>ระบบจัดการการใช้ยาซ้ำ (Drug Reuse) ผ่าน AppSheet</p>
         <a href="https://www.appsheet.com/start/4f7f5680-f3b4-4f66-a860-a92f5b19124b" target="_blank" rel="noopener" class="project-link">เปิด PharmaReuse</a>
       </div>
 
       <div class="project-column calc-section" data-id="drug-calculator">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>🧮 คำนวณขนาดยาเด็ก</h2>
         <p>โปรแกรมคำนวณขนาดยาเด็ก (Tablet to Syrup)</p>
         <a href="https://www.appsheet.com/start/df4bc12f-0075-40d1-be15-d520407876ae" target="_blank" rel="noopener" class="project-link">เปิด Drug Calculator</a>
       </div>
 
       <div class="project-column calc-section" data-id="kiddose-safe">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>👶 KidDose Safe</h2>
         <p>ตรวจสอบความเหมาะสมของขนาดยาในเด็ก (Safety Check)</p>
         <a href="https://ai.studio/apps/drive/1RoGBCSEiMy8KO24i0wFxyIuzG3Eu3dFk" target="_blank" rel="noopener" class="project-link">เปิด KidDose Safe</a>
       </div>
 
       <div class="project-column vaccine-section" data-id="vaxprint">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>💉 VaxPrint</h2>
         <p>Vaccine Label Manager</p>
         <a href="https://ai.studio/apps/drive/1gtbE1VGYg4_Y-Qmp5plWmEfi4wRXa6rO" target="_blank" rel="noopener" class="project-link">เปิด VaxPrint</a>
       </div>
 
       <div class="project-column emerbox-section" data-id="drug-box-check">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>📦 Drug Box Check</h2>
         <p>ระบบตรวจสอบกล่องยา / Emergency Drug Box</p>
         <a href="https://anupong0620.github.io/EMER-BOX-2-test/" target="_blank" rel="noopener" class="project-link">เปิด Drug Box Check</a>
       </div>
 
       <div class="project-column creative-section" data-id="canva-metadata-gen">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>🎨 Canva Metadata Gen</h2>
         <p>AI ช่วยสร้าง Title &amp; Keyword สำหรับภาพ (Canva Guidelines)</p>
         <a href="https://ai.studio/apps/drive/1SeJSsq40PmkL4YMer5rOtQIg3UonJ6qp" target="_blank" rel="noopener" class="project-link">เปิด Canva Metadata Gen</a>
       </div>
 
       <div class="project-column" data-id="price-check">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>💰 ราคาขายยา รพ.รัฐ</h2>
         <a href="https://anupong0620.github.io/Price-Check/" target="_blank" rel="noopener" class="project-link">ตรวจสอบราคาขายยา</a>
       </div>
 
       <div class="project-column calc-section" data-id="pharmacist-pro-adr">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
         <h2>⚠️ Pharmacist Pro ADR</h2>
         <p>
           ระบบประเมินอาการไม่พึงประสงค์จากยา (ADR Evaluation)
           <br><small>• Naranjo Score • Causality • Medscape Check</small>
         </p>
-        <a href="https://ai.studio/apps/drive/1IjjJHet2Sp2cXPBQZQ4acW892JXMnMb0" target="_blank" rel="noopener" class="project-link">
-          เปิด ADR Evaluation
-        </a>
+        <a href="https://ai.studio/apps/drive/1IjjJHet2Sp2cXPBQZQ4acW892JXMnMb0" target="_blank" rel="noopener" class="project-link">เปิด ADR Evaluation</a>
       </div>
 
     </main>
@@ -215,9 +251,14 @@
 
   <script>
     const grid = document.getElementById('projectGrid');
-    const STORAGE_KEY = 'projectGridOrder:v1';
+    const STORAGE_KEY = 'projectGridOrder:v2';
 
-    // 1) Restore order from localStorage
+    // กันกรณี SortableJS โหลดไม่มา
+    if (typeof Sortable === 'undefined') {
+      console.error('SortableJS not loaded. If CDN blocked, host Sortable.min.js in your repo and reference it locally.');
+    }
+
+    // Restore order
     (function restoreOrder(){
       try{
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
@@ -226,21 +267,16 @@
         const map = new Map([...grid.children].map(el => [el.dataset.id, el]));
         const frag = document.createDocumentFragment();
 
-        // Append in saved order (only if exists)
         saved.forEach(id => { if(map.has(id)) frag.appendChild(map.get(id)); });
-
-        // Append any new cards that weren't saved
         [...grid.children].forEach(el => {
           if(!saved.includes(el.dataset.id)) frag.appendChild(el);
         });
 
         grid.appendChild(frag);
-      }catch(e){
-        // ignore
-      }
+      }catch(e){}
     })();
 
-    // 2) Enable drag & drop (Smooth + Touch support)
+    // Enable Sortable (ลากได้เฉพาะที่ handle)
     const sortable = new Sortable(grid, {
       animation: 180,
       easing: "cubic-bezier(0.2, 0, 0, 1)",
@@ -249,30 +285,22 @@
       dragClass: "sortable-drag",
       fallbackOnBody: true,
       swapThreshold: 0.65,
+
+      handle: ".drag-handle",     // ✅ ลากได้เฉพาะแถบจับ
+      filter: "a, button",        // ✅ ไม่ลากจากลิงก์/ปุ่ม
+      preventOnFilter: false,
+
+      delay: 120,                 // ✅ ช่วยมือถือ/ทัช
+      delayOnTouchOnly: true,
+      touchStartThreshold: 3,
+
       onEnd: saveOrder
     });
 
-    // 3) Save order to localStorage
     function saveOrder(){
       const order = [...grid.children].map(el => el.dataset.id);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
     }
-
-    // 4) Prevent accidental drag from clicking buttons/links
-    //    (แต่ยังลากได้จากพื้นที่การ์ด)
-    grid.addEventListener('mousedown', (e)=>{
-      if(e.target.closest('a, button')) {
-        sortable.option('disabled', true);
-      } else {
-        sortable.option('disabled', false);
-      }
-    });
-    grid.addEventListener('mouseup', ()=> sortable.option('disabled', false));
-    grid.addEventListener('touchstart', (e)=>{
-      if(e.target.closest('a, button')) sortable.option('disabled', true);
-      else sortable.option('disabled', false);
-    }, {passive:true});
-    grid.addEventListener('touchend', ()=> sortable.option('disabled', false));
   </script>
 </body>
 </html>

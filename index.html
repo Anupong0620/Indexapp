@@ -1,170 +1,278 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โปรเจกต์รวม</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>โปรเจกต์รวม</title>
 
-    <style>
-        /* --- General Styles --- */
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f4f7f9;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-        }
+  <style>
+    /* --- General Styles --- */
+    body{
+      font-family:'Sarabun',sans-serif;
+      background-color:#f4f7f9;
+      margin:0;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      min-height:100vh;
+    }
 
-        /* --- Main Container --- */
-        .main-container { width: 100%; max-width: 1200px; }
-        
-        /* --- Header --- */
-        header h1 {
-            color: #2c3e50; text-align: center; margin-bottom: 40px;
-        }
+    /* --- Main Container --- */
+    .main-container{ width:100%; max-width:1200px; }
 
-        /* --- Layout for Columns --- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+    /* --- Header --- */
+    header h1{
+      color:#2c3e50;
+      text-align:center;
+      margin-bottom:40px;
+    }
 
-        /* --- Column/Card Style --- */
-        .project-column {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .project-column:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
-        .project-column h2 {
-            color: #34495e; border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 15px; margin-top: 0;
-        }
-        .project-column p { margin: 10px 0 0; color:#546e7a; }
+    /* --- Layout for Cards --- */
+    .project-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:30px;
+    }
 
-        /* --- Link/Button Style --- */
-        .project-link {
-            display: block; background-color: #3498db; color: #ffffff;
-            padding: 15px 20px; margin-top: 20px; border-radius: 8px;
-            text-decoration: none; text-align: center; font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .project-link:hover { background-color: #2980b9; }
+    /* --- Card Style --- */
+    .project-column{
+      background-color:#ffffff;
+      border-radius:12px;
+      padding:25px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      transition:transform 0.25s ease, box-shadow 0.25s ease;
+      cursor:grab;
+      user-select:none;
+      -webkit-user-select:none;
+      touch-action:manipulation;
+    }
+    .project-column:hover{
+      transform:translateY(-5px);
+      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+    }
+    .project-column:active{ cursor:grabbing; }
+    .project-column h2{
+      color:#34495e;
+      border-bottom:2px solid #e0e0e0;
+      padding-bottom:15px;
+      margin-top:0;
+    }
+    .project-column p{ margin:10px 0 0; color:#546e7a; }
 
-        /* Warfarin สีเฉพาะ (แดง) */
-        .warfarin-section .project-link { background-color: #e74c3c; }
-        .warfarin-section .project-link:hover { background-color: #c0392b; }
+    /* --- Link/Button Style --- */
+    .project-link{
+      display:block;
+      background-color:#3498db;
+      color:#ffffff;
+      padding:15px 20px;
+      margin-top:20px;
+      border-radius:8px;
+      text-decoration:none;
+      text-align:center;
+      font-weight:bold;
+      transition:background-color 0.25s ease, transform 0.12s ease;
+    }
+    .project-link:hover{ background-color:#2980b9; }
+    .project-link:active{ transform:scale(0.99); }
 
-        /* Drug Allergy สีเฉพาะ (เขียว) */
-        .allergy-section .project-link { background-color: #10b981; }
-        .allergy-section .project-link:hover { background-color: #059669; }
+    /* --- Sortable states --- */
+    .sortable-ghost{
+      opacity:0.35;
+      transform:none !important;
+    }
+    .sortable-chosen{
+      box-shadow:0 14px 28px rgba(0,0,0,0.18) !important;
+      transform:translateY(-2px) scale(1.01) !important;
+    }
+    .sortable-drag{
+      cursor:grabbing !important;
+    }
 
-        /* PharmaReuse สีเฉพาะ (ม่วง) */
-        .pharmareuse-section .project-link { background-color: #7f32d8; } 
-        .pharmareuse-section .project-link:hover { background-color: #6a2abf; }
+    /* --- Section Colors --- */
+    .warfarin-section .project-link{ background-color:#e74c3c; }
+    .warfarin-section .project-link:hover{ background-color:#c0392b; }
 
-        /* Calculator & Safety สีเฉพาะ (ส้ม) */
-        .calc-section .project-link { background-color: #f39c12; }
-        .calc-section .project-link:hover { background-color: #d35400; }
+    .allergy-section .project-link{ background-color:#10b981; }
+    .allergy-section .project-link:hover{ background-color:#059669; }
 
-        /* Emergency Drug Box สีเฉพาะ (เขียวเข้ม) */
-        .emerbox-section .project-link { background-color: #198754; }
-        .emerbox-section .project-link:hover { background-color: #146c43; }
+    .pharmareuse-section .project-link{ background-color:#7f32d8; }
+    .pharmareuse-section .project-link:hover{ background-color:#6a2abf; }
 
-        /* Creative/AI Tools สีเฉพาะ (ชมพูบานเย็น) */
-        .creative-section .project-link { background-color: #d63384; }
-        .creative-section .project-link:hover { background-color: #c2185b; }
+    .calc-section .project-link{ background-color:#f39c12; }
+    .calc-section .project-link:hover{ background-color:#d35400; }
 
-        /* VaxPrint สีเฉพาะ (ฟ้าอมเขียว Teal) */
-        .vaccine-section .project-link { background-color: #17a2b8; }
-        .vaccine-section .project-link:hover { background-color: #138496; }
-    </style>
+    .emerbox-section .project-link{ background-color:#198754; }
+    .emerbox-section .project-link:hover{ background-color:#146c43; }
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    .creative-section .project-link{ background-color:#d63384; }
+    .creative-section .project-link:hover{ background-color:#c2185b; }
+
+    .vaccine-section .project-link{ background-color:#17a2b8; }
+    .vaccine-section .project-link:hover{ background-color:#138496; }
+
+    /* --- Small hint text --- */
+    .hint{
+      text-align:center;
+      margin:-20px 0 25px;
+      color:#607d8b;
+      font-size:14px;
+    }
+    .hint kbd{
+      background:#e9eef3;
+      border:1px solid #d6dee7;
+      border-bottom-width:2px;
+      padding:2px 6px;
+      border-radius:6px;
+      font-family:inherit;
+      font-size:12px;
+    }
+  </style>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- SortableJS (ลาก/วาง + รองรับมือถือ) -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
+
 <body>
+  <div class="main-container">
+    <header>
+      <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
+      <div class="hint">ลากการ์ดเพื่อจัดลำดับใหม่ได้ทันที (ระบบจะ <b>จำลำดับ</b> ให้) • ทิป: ค้างแล้วลาก / ใช้ <kbd>Touch</kbd> บนมือถือได้</div>
+    </header>
 
-    <div class="main-container">
-        <header>
-            <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
-        </header>
+    <main class="project-grid" id="projectGrid">
 
-        <main class="project-grid">
+      <div class="project-column allergy-section" data-id="drug-allergy-backup">
+        <h2>🧬 Drug Allergy (Backup)</h2>
+        <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
+        <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" rel="noopener" class="project-link">เปิด Drug Allergy Backup</a>
+      </div>
 
-            <div class="project-column allergy-section">
-                <h2>🧬 Drug Allergy (Backup)</h2>
-                <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
-                <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" class="project-link">เปิด Drug Allergy Backup</a>
-            </div>
+      <div class="project-column warfarin-section" data-id="warfarin">
+        <h2>💊 Warfarin</h2>
+        <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" rel="noopener" class="project-link">Warfarin Pharmacist Note</a>
+        <a href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank" rel="noopener" class="project-link">Warfarin Double Check</a>
+      </div>
 
-            <div class="project-column warfarin-section">
-                <h2>💊 Warfarin</h2>
-                <a href="https://anupong0620.github.io/WARFARIN-SAVE1/" target="_blank" class="project-link">Warfarin Pharmacist Note</a>
-                <a href="https://anupong0620.github.io/Warfarin-Drug-Checker/" target="_blank" class="project-link">Warfarin Double Check</a>
-            </div>
+      <div class="project-column pharmareuse-section" data-id="pharmareuse">
+        <h2>♻️ PharmaReuse</h2>
+        <p>ระบบจัดการการใช้ยาซ้ำ (Drug Reuse) ผ่าน AppSheet</p>
+        <a href="https://www.appsheet.com/start/4f7f5680-f3b4-4f66-a860-a92f5b19124b" target="_blank" rel="noopener" class="project-link">เปิด PharmaReuse</a>
+      </div>
 
-            <div class="project-column pharmareuse-section">
-                <h2>♻️ PharmaReuse</h2>
-                <p>ระบบจัดการการใช้ยาซ้ำ (Drug Reuse) ผ่าน AppSheet</p>
-                <a href="https://www.appsheet.com/start/4f7f5680-f3b4-4f66-a860-a92f5b19124b" target="_blank" class="project-link">เปิด PharmaReuse</a>
-            </div>
+      <div class="project-column calc-section" data-id="drug-calculator">
+        <h2>🧮 คำนวณขนาดยาเด็ก</h2>
+        <p>โปรแกรมคำนวณขนาดยาเด็ก (Tablet to Syrup)</p>
+        <a href="https://www.appsheet.com/start/df4bc12f-0075-40d1-be15-d520407876ae" target="_blank" rel="noopener" class="project-link">เปิด Drug Calculator</a>
+      </div>
 
-            <div class="project-column calc-section">
-                <h2>🧮 คำนวณขนาดยาเด็ก</h2>
-                <p>โปรแกรมคำนวณขนาดยาเด็ก (Tablet to Syrup)</p>
-                <a href="https://www.appsheet.com/start/df4bc12f-0075-40d1-be15-d520407876ae" target="_blank" class="project-link">เปิด Drug Calculator</a>
-            </div>
+      <div class="project-column calc-section" data-id="kiddose-safe">
+        <h2>👶 KidDose Safe</h2>
+        <p>ตรวจสอบความเหมาะสมของขนาดยาในเด็ก (Safety Check)</p>
+        <a href="https://ai.studio/apps/drive/1RoGBCSEiMy8KO24i0wFxyIuzG3Eu3dFk" target="_blank" rel="noopener" class="project-link">เปิด KidDose Safe</a>
+      </div>
 
-            <div class="project-column calc-section">
-                <h2>👶 KidDose Safe</h2>
-                <p>ตรวจสอบความเหมาะสมของขนาดยาในเด็ก (Safety Check)</p>
-                <a href="https://ai.studio/apps/drive/1RoGBCSEiMy8KO24i0wFxyIuzG3Eu3dFk" target="_blank" class="project-link">เปิด KidDose Safe</a>
-            </div>
+      <div class="project-column vaccine-section" data-id="vaxprint">
+        <h2>💉 VaxPrint</h2>
+        <p>Vaccine Label Manager</p>
+        <a href="https://ai.studio/apps/drive/1gtbE1VGYg4_Y-Qmp5plWmEfi4wRXa6rO" target="_blank" rel="noopener" class="project-link">เปิด VaxPrint</a>
+      </div>
 
-            <div class="project-column vaccine-section">
-                <h2>💉 VaxPrint</h2>
-                <p>Vaccine Label Manager</p>
-                <a href="https://ai.studio/apps/drive/1gtbE1VGYg4_Y-Qmp5plWmEfi4wRXa6rO" target="_blank" class="project-link">เปิด VaxPrint</a>
-            </div>
+      <div class="project-column emerbox-section" data-id="drug-box-check">
+        <h2>📦 Drug Box Check</h2>
+        <p>ระบบตรวจสอบกล่องยา / Emergency Drug Box</p>
+        <a href="https://anupong0620.github.io/EMER-BOX-2-test/" target="_blank" rel="noopener" class="project-link">เปิด Drug Box Check</a>
+      </div>
 
-            <div class="project-column emerbox-section">
-                <h2>📦 Drug Box Check</h2>
-                <p>ระบบตรวจสอบกล่องยา / Emergency Drug Box</p>
-                <a href="https://anupong0620.github.io/EMER-BOX-2-test/" target="_blank" class="project-link">เปิด Drug Box Check</a>
-            </div>
+      <div class="project-column creative-section" data-id="canva-metadata-gen">
+        <h2>🎨 Canva Metadata Gen</h2>
+        <p>AI ช่วยสร้าง Title &amp; Keyword สำหรับภาพ (Canva Guidelines)</p>
+        <a href="https://ai.studio/apps/drive/1SeJSsq40PmkL4YMer5rOtQIg3UonJ6qp" target="_blank" rel="noopener" class="project-link">เปิด Canva Metadata Gen</a>
+      </div>
 
-            <div class="project-column creative-section">
-                <h2>🎨 Canva Metadata Gen</h2>
-                <p>AI ช่วยสร้าง Title & Keyword สำหรับภาพ (Canva Guidelines)</p>
-                <a href="https://ai.studio/apps/drive/1SeJSsq40PmkL4YMer5rOtQIg3UonJ6qp" target="_blank" class="project-link">เปิด Canva Metadata Gen</a>
-            </div>
+      <div class="project-column" data-id="price-check">
+        <h2>💰 ราคาขายยา รพ.รัฐ</h2>
+        <a href="https://anupong0620.github.io/Price-Check/" target="_blank" rel="noopener" class="project-link">ตรวจสอบราคาขายยา</a>
+      </div>
 
-            <div class="project-column">
-                <h2>💰 ราคาขายยา รพ.รัฐ</h2>
-                <a href="https://anupong0620.github.io/Price-Check/" target="_blank" class="project-link">ตรวจสอบราคาขายยา</a>
-            </div>
+      <div class="project-column calc-section" data-id="pharmacist-pro-adr">
+        <h2>⚠️ Pharmacist Pro ADR</h2>
+        <p>
+          ระบบประเมินอาการไม่พึงประสงค์จากยา (ADR Evaluation)
+          <br><small>• Naranjo Score • Causality • Medscape Check</small>
+        </p>
+        <a href="https://ai.studio/apps/drive/1IjjJHet2Sp2cXPBQZQ4acW892JXMnMb0" target="_blank" rel="noopener" class="project-link">
+          เปิด ADR Evaluation
+        </a>
+      </div>
 
-            <div class="project-column calc-section">
-    <h2>⚠️ Pharmacist Pro ADR</h2>
-    <p>
-        ระบบประเมินอาการไม่พึงประสงค์จากยา (ADR Evaluation)  
-        <br><small>• Naranjo Score • Causality • Medscape Check</small>
-    </p>
-    <a href="https://ai.studio/apps/drive/1IjjJHet2Sp2cXPBQZQ4acW892JXMnMb0" target="_blank" class="project-link">
-        เปิด ADR Evaluation
-    </a>
-</div>
-        </main>
-    </div>
+    </main>
+  </div>
 
+  <script>
+    const grid = document.getElementById('projectGrid');
+    const STORAGE_KEY = 'projectGridOrder:v1';
+
+    // 1) Restore order from localStorage
+    (function restoreOrder(){
+      try{
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+        if(!saved || !Array.isArray(saved)) return;
+
+        const map = new Map([...grid.children].map(el => [el.dataset.id, el]));
+        const frag = document.createDocumentFragment();
+
+        // Append in saved order (only if exists)
+        saved.forEach(id => { if(map.has(id)) frag.appendChild(map.get(id)); });
+
+        // Append any new cards that weren't saved
+        [...grid.children].forEach(el => {
+          if(!saved.includes(el.dataset.id)) frag.appendChild(el);
+        });
+
+        grid.appendChild(frag);
+      }catch(e){
+        // ignore
+      }
+    })();
+
+    // 2) Enable drag & drop (Smooth + Touch support)
+    const sortable = new Sortable(grid, {
+      animation: 180,
+      easing: "cubic-bezier(0.2, 0, 0, 1)",
+      ghostClass: "sortable-ghost",
+      chosenClass: "sortable-chosen",
+      dragClass: "sortable-drag",
+      fallbackOnBody: true,
+      swapThreshold: 0.65,
+      onEnd: saveOrder
+    });
+
+    // 3) Save order to localStorage
+    function saveOrder(){
+      const order = [...grid.children].map(el => el.dataset.id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+    }
+
+    // 4) Prevent accidental drag from clicking buttons/links
+    //    (แต่ยังลากได้จากพื้นที่การ์ด)
+    grid.addEventListener('mousedown', (e)=>{
+      if(e.target.closest('a, button')) {
+        sortable.option('disabled', true);
+      } else {
+        sortable.option('disabled', false);
+      }
+    });
+    grid.addEventListener('mouseup', ()=> sortable.option('disabled', false));
+    grid.addEventListener('touchstart', (e)=>{
+      if(e.target.closest('a, button')) sortable.option('disabled', true);
+      else sortable.option('disabled', false);
+    }, {passive:true});
+    grid.addEventListener('touchend', ()=> sortable.option('disabled', false));
+  </script>
 </body>
 </html>
-

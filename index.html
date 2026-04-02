@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>โปรเจกต์รวม</title>
+  <title>โปรเจกต์รวม - ระบบจัดการยาและเครื่องมือแพทย์</title>
 
   <style>
     body{
@@ -59,7 +59,7 @@
       box-shadow:0 8px 20px rgba(0,0,0,0.12);
     }
 
-    /* ===== Drag Handle (จับลากตรงนี้เท่านั้น) ===== */
+    /* ===== Drag Handle ===== */
     .drag-handle{
       display:flex;
       align-items:center;
@@ -113,7 +113,7 @@
     .sortable-chosen{ box-shadow:0 14px 28px rgba(0,0,0,0.18) !important; }
     .sortable-drag{ cursor:grabbing !important; }
 
-    /* สีเฉพาะ */
+    /* สีเฉพาะของแต่ละโปรเจกต์ */
     .warfarin-section .project-link{ background-color:#e74c3c; }
     .warfarin-section .project-link:hover{ background-color:#c0392b; }
 
@@ -135,16 +135,18 @@
     .vaccine-section .project-link{ background-color:#17a2b8; }
     .vaccine-section .project-link:hover{ background-color:#138496; }
 
-    /* 🧠 Prompt Studio Pro */
     .promptstudio-section .project-link{ background-color:#6f42c1; }
     .promptstudio-section .project-link:hover{ background-color:#5a32a3; }
+
+    /* ✅ เพิ่มสีสำหรับ Drug Timeline */
+    .timeline-section .project-link{ background-color:#5c6bc0; }
+    .timeline-section .project-link:hover{ background-color:#3f51b5; }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- SortableJS (ลาก/วาง + รองรับมือถือ) -->
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
 
@@ -156,6 +158,15 @@
     </header>
 
     <main class="project-grid" id="projectGrid">
+
+      <div class="project-column timeline-section" data-id="drug-timeline">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
+        <h2>📅 Drug Timeline Tool</h2>
+        <p>เครื่องมือสร้างไทม์ไลน์การใช้ยา เพื่อวิเคราะห์ความสัมพันธ์ของยาและอาการไม่พึงประสงค์ (ADR)</p>
+        <a href="https://anupong0620.github.io/Drug-Timeline-Management-Tool/" target="_blank" rel="noopener" class="project-link">เปิด Drug Timeline Tool</a>
+      </div>
 
       <div class="project-column allergy-section" data-id="drug-allergy-backup">
         <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
@@ -230,7 +241,6 @@
         <a href="https://ai.studio/apps/drive/1SeJSsq40PmkL4YMer5rOtQIg3UonJ6qp" target="_blank" rel="noopener" class="project-link">เปิด Canva Metadata Gen</a>
       </div>
 
-      <!-- ✅ เพิ่มการ์ดใหม่: Prompt Studio Pro -->
       <div class="project-column promptstudio-section" data-id="prompt-studio-pro">
         <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
@@ -267,12 +277,11 @@
     const grid = document.getElementById('projectGrid');
     const STORAGE_KEY = 'projectGridOrder:v2';
 
-    // กันกรณี SortableJS โหลดไม่มา
     if (typeof Sortable === 'undefined') {
-      console.error('SortableJS not loaded. If CDN blocked, host Sortable.min.js in your repo and reference it locally.');
+      console.error('SortableJS not loaded.');
     }
 
-    // Restore order
+    // ฟังก์ชันคืนค่าลำดับที่บันทึกไว้
     (function restoreOrder(){
       try{
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
@@ -290,7 +299,7 @@
       }catch(e){}
     })();
 
-    // Enable Sortable (ลากได้เฉพาะที่ handle)
+    // เปิดใช้งานการลากวาง
     const sortable = new Sortable(grid, {
       animation: 180,
       easing: "cubic-bezier(0.2, 0, 0, 1)",
@@ -299,22 +308,17 @@
       dragClass: "sortable-drag",
       fallbackOnBody: true,
       swapThreshold: 0.65,
-
-      handle: ".drag-handle",     // ✅ ลากได้เฉพาะแถบจับ
-      filter: "a, button",        // ✅ ไม่ลากจากลิงก์/ปุ่ม
+      handle: ".drag-handle",
+      filter: "a, button",
       preventOnFilter: false,
-
-      delay: 120,                 // ✅ ช่วยมือถือ/ทัช
+      delay: 120,
       delayOnTouchOnly: true,
       touchStartThreshold: 3,
-
-      onEnd: saveOrder
+      onEnd: function() {
+        const order = [...grid.children].map(el => el.dataset.id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
+      }
     });
-
-    function saveOrder(){
-      const order = [...grid.children].map(el => el.dataset.id);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(order));
-    }
   </script>
 </body>
 </html>

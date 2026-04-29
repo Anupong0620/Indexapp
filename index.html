@@ -138,13 +138,18 @@
     .promptstudio-section .project-link{ background-color:#6f42c1; }
     .promptstudio-section .project-link:hover{ background-color:#5a32a3; }
 
-    /* ✅ เพิ่มสีสำหรับ Drug Timeline */
     .timeline-section .project-link{ background-color:#5c6bc0; }
     .timeline-section .project-link:hover{ background-color:#3f51b5; }
 
-    /* ✅ เพิ่มสีสำหรับ AI Battle Arena */
     .arena-section .project-link{ background-color:#ff5722; }
     .arena-section .project-link:hover{ background-color:#e64a19; }
+
+    /* ✅ สีใหม่สำหรับ Med AI และ ForexFlow */
+    .med-ai-section .project-link { background-color:#6366f1; }
+    .med-ai-section .project-link:hover { background-color:#4f46e5; }
+
+    .forex-section .project-link { background-color:#f59e0b; }
+    .forex-section .project-link:hover { background-color:#d97706; }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,22 +168,39 @@
 
     <main class="project-grid" id="projectGrid">
 
+      <div class="project-column med-ai-section" data-id="med-ai-assistant">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
+        <h2>🤖 Med AI Assistant</h2>
+        <p>ผู้ช่วย AI อัจฉริยะสำหรับการสืบค้นข้อมูลยาและวิเคราะห์ทางการแพทย์</p>
+        <a href="https://aistudio.google.com/apps/fac04af7-ea1d-4a8c-981a-cfd588411c71?showPreview=true&showAssistant=true" target="_blank" rel="noopener" class="project-link">เปิด Med AI Assistant</a>
+      </div>
+
+      <div class="project-column forex-section" data-id="forex-flow">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
+        <h2>📈 ForexFlow</h2>
+        <p>ระบบบันทึกสถิติการเทรด กำไร-ขาดทุน และวิเคราะห์ Performance</p>
+        <a href="#" target="_blank" rel="noopener" class="project-link">เปิด ForexFlow</a>
+      </div>
+
       <div class="project-column timeline-section" data-id="drug-timeline">
         <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>📅 Drug Timeline Tool</h2>
-        <p>เครื่องมือสร้างไทม์ไลน์การใช้ยา เพื่อวิเคราะห์ความสัมพันธ์ของยาและอาการไม่พึงประสงค์ (ADR)</p>
+        <p>เครื่องมือสร้างไทม์ไลน์การใช้ยา เพื่อวิเคราะห์ความสัมพันธ์ของยาและ ADR</p>
         <a href="https://anupong0620.github.io/Drug-Timeline-Management-Tool/" target="_blank" rel="noopener" class="project-link">เปิด Drug Timeline Tool</a>
       </div>
 
       <div class="project-column allergy-section" data-id="drug-allergy-backup">
         <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
-          <span class="drag-icon">⠿</span>
-          <span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>🧬 Drug Allergy (Backup)</h2>
-        <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง) — <em>ต้องกรอกรหัสก่อนเข้าใช้งาน</em></p>
+        <p>ระบบตรวจสอบประวัติแพ้ยา (ออฟไลน์/สำรอง)</p>
         <a href="https://anupong0620.github.io/drug-allergy-backup/" target="_blank" rel="noopener" class="project-link">เปิด Drug Allergy Backup</a>
       </div>
 
@@ -241,7 +263,7 @@
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>🎨 Canva Metadata Gen</h2>
-        <p>AI ช่วยสร้าง Title &amp; Keyword สำหรับภาพ (Canva Guidelines)</p>
+        <p>AI ช่วยสร้าง Title & Keyword สำหรับภาพ</p>
         <a href="https://ai.studio/apps/drive/1SeJSsq40PmkL4YMer5rOtQIg3UonJ6qp" target="_blank" rel="noopener" class="project-link">เปิด Canva Metadata Gen</a>
       </div>
 
@@ -250,7 +272,7 @@
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>🧠 Prompt Studio Pro</h2>
-        <p>Prompt Workspace สำหรับงานสร้างภาพ/คอนเทนต์ (เวอร์ชัน Pro)</p>
+        <p>Prompt Workspace สำหรับงานสร้างคอนเทนต์</p>
         <a href="https://anupong0620.github.io/Prompt-Studio-Pro/" target="_blank" rel="noopener" class="project-link">เปิด Prompt Studio Pro</a>
       </div>
 
@@ -267,10 +289,7 @@
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>⚠️ Pharmacist Pro ADR</h2>
-        <p>
-          ระบบประเมินอาการไม่พึงประสงค์จากยา (ADR Evaluation)
-          <br><small>• Naranjo Score • Causality • Medscape Check</small>
-        </p>
+        <p>ระบบประเมิน ADR (Naranjo/Causality)</p>
         <a href="https://ai.studio/apps/drive/1IjjJHet2Sp2cXPBQZQ4acW892JXMnMb0" target="_blank" rel="noopener" class="project-link">เปิด ADR Evaluation</a>
       </div>
 
@@ -279,7 +298,7 @@
           <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
         </div>
         <h2>⚔️ AI Battle Arena</h2>
-        <p>แพลตฟอร์มสำหรับทดสอบและประชันความสามารถของโมเดล AI</p>
+        <p>แพลตฟอร์มสำหรับทดสอบโมเดล AI</p>
         <a href="https://anupong0620.github.io/-AI-BATTLE-ARENA/" target="_blank" rel="noopener" class="project-link">เปิด AI Battle Arena</a>
       </div>
 
@@ -289,10 +308,6 @@
   <script>
     const grid = document.getElementById('projectGrid');
     const STORAGE_KEY = 'projectGridOrder:v2';
-
-    if (typeof Sortable === 'undefined') {
-      console.error('SortableJS not loaded.');
-    }
 
     // ฟังก์ชันคืนค่าลำดับที่บันทึกไว้
     (function restoreOrder(){
@@ -319,14 +334,7 @@
       ghostClass: "sortable-ghost",
       chosenClass: "sortable-chosen",
       dragClass: "sortable-drag",
-      fallbackOnBody: true,
-      swapThreshold: 0.65,
       handle: ".drag-handle",
-      filter: "a, button",
-      preventOnFilter: false,
-      delay: 120,
-      delayOnTouchOnly: true,
-      touchStartThreshold: 3,
       onEnd: function() {
         const order = [...grid.children].map(el => el.dataset.id);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(order));

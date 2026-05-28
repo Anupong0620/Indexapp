@@ -114,42 +114,20 @@
     .sortable-drag{ cursor:grabbing !important; }
 
     /* สีเฉพาะของแต่ละโปรเจกต์ */
+    .clinical-tool-section .project-link{ background-color:#e67e22; }
+    .clinical-tool-section .project-link:hover{ background-color:#d35400; }
     .warfarin-section .project-link{ background-color:#e74c3c; }
-    .warfarin-section .project-link:hover{ background-color:#c0392b; }
-
     .allergy-section .project-link{ background-color:#10b981; }
-    .allergy-section .project-link:hover{ background-color:#059669; }
-
     .pharmareuse-section .project-link{ background-color:#7f32d8; }
-    .pharmareuse-section .project-link:hover{ background-color:#6a2abf; }
-
     .calc-section .project-link{ background-color:#f39c12; }
-    .calc-section .project-link:hover{ background-color:#d35400; }
-
     .emerbox-section .project-link{ background-color:#198754; }
-    .emerbox-section .project-link:hover{ background-color:#146c43; }
-
     .creative-section .project-link{ background-color:#d63384; }
-    .creative-section .project-link:hover{ background-color:#c2185b; }
-
     .vaccine-section .project-link{ background-color:#17a2b8; }
-    .vaccine-section .project-link:hover{ background-color:#138496; }
-
     .promptstudio-section .project-link{ background-color:#6f42c1; }
-    .promptstudio-section .project-link:hover{ background-color:#5a32a3; }
-
     .timeline-section .project-link{ background-color:#5c6bc0; }
-    .timeline-section .project-link:hover{ background-color:#3f51b5; }
-
     .arena-section .project-link{ background-color:#ff5722; }
-    .arena-section .project-link:hover{ background-color:#e64a19; }
-
-    /* ✅ สีใหม่สำหรับ Med AI และ ForexFlow */
     .med-ai-section .project-link { background-color:#6366f1; }
-    .med-ai-section .project-link:hover { background-color:#4f46e5; }
-
     .forex-section .project-link { background-color:#f59e0b; }
-    .forex-section .project-link:hover { background-color:#d97706; }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,10 +141,19 @@
   <div class="main-container">
     <header>
       <h1>หน้าหลักรวมโปรเจกต์ 🏥</h1>
-      <div class="hint">ลาก “แถบจับ” ด้านบนของแต่ละการ์ดเพื่อจัดลำดับใหม่ (จำลำดับอัตโนมัติ) • มือถือ: <kbd>แตะค้าง</kbd> แล้วลาก</div>
+      <div class="hint">ลาก “แถบจับ” ด้านบนของแต่ละการ์ดเพื่อจัดลำดับใหม่ • มือถือ: <kbd>แตะค้าง</kbd> แล้วลาก</div>
     </header>
 
     <main class="project-grid" id="projectGrid">
+
+      <div class="project-column clinical-tool-section" data-id="clinical-tool">
+        <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">
+          <span class="drag-icon">⠿</span><span class="drag-text">ลากเพื่อเรียงลำดับ</span>
+        </div>
+        <h2>🩺 เครื่องมือทางคลินิก</h2>
+        <p>จัดทำโดย Endo-Pharma : by เภสัชกรเอ็นดู</p>
+        <a href="https://pharmatoolsthailand.github.io/Homepage/index.html" target="_blank" rel="noopener" class="project-link">เปิดเครื่องมือทางคลินิก</a>
+      </div>
 
       <div class="project-column med-ai-section" data-id="med-ai-assistant">
         <div class="drag-handle" title="ลากตรงนี้เพื่อย้ายการ์ด">

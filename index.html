@@ -77,7 +77,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
     
     <!-- HEADER -->
-    <header class="flex flex-col md:flex-row md:items-center md:justify-between pb-8 mb-8 border-b border-slate-200 dark:border-slate-800 gap-4">
+    <header class="flex flex-col xl:flex-row xl:items-center xl:justify-between pb-8 mb-8 border-b border-slate-200 dark:border-slate-800 gap-4">
       <div>
         <div class="flex items-center gap-3">
           <div class="p-2.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-2xl">
@@ -102,11 +102,25 @@
           <span id="editModeText">เปิดโหมดปรับแต่งบอร์ด</span>
         </button>
 
+        <!-- Export Code Button -->
+        <button id="exportCodeBtn" class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-xl hover:bg-blue-100 active:scale-95 transition-all dark:bg-blue-900/30 dark:border-blue-800/50 dark:text-blue-300 dark:hover:bg-blue-900/50" title="Export โค้ดสำหรับอัปเดตขึ้น GitHub">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span>Export โค้ด</span>
+        </button>
+
         <!-- Reset Button -->
         <button id="resetAllBtn" class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 active:scale-95 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700/50" title="คืนค่าเริ่มต้นระบบทั้งหมด">
           <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-          <span>รีเซ็ตค่าเริ่มต้น</span>
+          <span class="hidden sm:inline">รีเซ็ตค่าเริ่มต้น</span>
         </button>
+
+        <!-- GitHub Link -->
+        <a href="https://github.com/anupong0620" target="_blank" rel="noopener" class="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 active:scale-95 transition-all dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700/50" title="ไปที่ GitHub ของฉัน">
+          <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-1.12.38-.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+          </svg>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
 
         <!-- Light/Dark Theme Switcher -->
         <button id="themeToggleBtn" class="p-2.5 bg-white border border-slate-200 text-slate-700 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/50 active:scale-95 transition-all">
@@ -195,7 +209,7 @@
 
   <!-- GLOBAL DIALOG MODAL (For Folder, Category, Card creations/edits) -->
   <div id="configModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
-    <div class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden transform scale-95 transition-all duration-300 max-h-[90vh] flex flex-col">
+    <div class="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-100 dark:border-slate-700 overflow-hidden transform scale-95 transition-all duration-300 max-h-[90vh] flex flex-col">
       <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700/50 flex justify-between items-center bg-slate-50 dark:bg-slate-900/40">
         <h3 id="modalTitle" class="text-lg font-bold text-slate-900 dark:text-white">ปรับแต่งบอร์ด</h3>
@@ -754,11 +768,13 @@
     // -----------------------------------------------------------------
     // EDIT DIALOG MODALS ENGINE (Vanilla Popup Modals)
     // -----------------------------------------------------------------
-    function openModal(title, bodyHTML, onSaveCallback) {
+    function openModal(title, bodyHTML, onSaveCallback, saveBtnText = "บันทึกการแก้ไข") {
       document.getElementById('modalTitle').innerText = title;
       document.getElementById('modalBody').innerHTML = bodyHTML;
       
       const saveBtn = document.getElementById('saveModalBtn');
+      saveBtn.innerText = saveBtnText;
+
       // Clone save button to remove previous event listeners cleanly
       const newSaveBtn = saveBtn.cloneNode(true);
       saveBtn.parentNode.replaceChild(newSaveBtn, saveBtn);
@@ -1284,6 +1300,43 @@
       }
       lucide.createIcons();
       renderDashboard();
+    });
+
+    // Export Data Configuration to Code Update
+    document.getElementById('exportCodeBtn').addEventListener('click', () => {
+      const foldersCode = `const defaultFolders = ${JSON.stringify(folders, null, 2)};`;
+      const categoriesCode = `const defaultCategories = ${JSON.stringify(categories, null, 2)};`;
+      const cardsCode = `const defaultCards = ${JSON.stringify(cards, null, 2)};`;
+
+      const combinedCode = `// -----------------------------------------------------------------\n// DEFAULT CONFIG & DATA STRUCTURE\n// -----------------------------------------------------------------\n${foldersCode}\n\n${categoriesCode}\n\n${cardsCode}`;
+
+      const bodyHTML = `
+        <div class="space-y-3">
+          <div class="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700/50 p-4 rounded-xl flex items-start gap-3">
+            <i data-lucide="info" class="w-5 h-5 text-blue-500 shrink-0 mt-0.5"></i>
+            <div class="text-xs text-blue-800 dark:text-blue-300">
+              <p class="font-bold text-sm mb-1">วิธีอัปเดตข้อมูลขึ้น GitHub ของคุณ</p>
+              <ol class="list-decimal ml-4 space-y-1.5 mt-2">
+                <li>กดปุ่ม <strong>"คัดลอกโค้ด"</strong> สีเขียวด้านล่างสุด</li>
+                <li>เปิดไฟล์ <code>index.html</code> ต้นฉบับที่คุณจะอัปโหลดขึ้น GitHub</li>
+                <li>เลื่อนหาบรรทัดที่เขียนว่า <code>// DEFAULT CONFIG & DATA STRUCTURE</code> (ประมาณบรรทัดที่ 270)</li>
+                <li>ลบตัวแปร 3 ตัวเก่าทิ้ง แล้ววางโค้ดที่คัดลอกนี้ทับลงไปแทนที่ได้เลย</li>
+              </ol>
+            </div>
+          </div>
+          <textarea id="exportCodeTextarea" rows="10" class="w-full text-[11px] font-mono bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-300 p-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500" readonly>${combinedCode}</textarea>
+        </div>
+      `;
+
+      openModal('Export โค้ดเพื่ออัปเดตระบบ', bodyHTML, () => {
+        const textarea = document.getElementById('exportCodeTextarea');
+        textarea.select();
+        document.execCommand('copy');
+        showToast("คัดลอกโค้ดเข้า Clipboard แล้ว! นำไปวางทับในไฟล์ได้เลย");
+        return true;
+      }, "คัดลอกโค้ด");
+
+      lucide.createIcons();
     });
 
     // Reset All configurations back to default settings

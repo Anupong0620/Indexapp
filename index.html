@@ -286,25 +286,6 @@
 
   const defaultCards = [
     {
-      "id": "clinical-tool",
-      "folderId": "folderPharmacy",
-      "categoryId": "clinical",
-      "emoji": "🩺",
-      "title": "เครื่องมือทางคลินิก",
-      "subtitle": "Endo-Pharma • เภสัชกรเอ็นดู",
-      "desc": "หน้าหลักศูนย์รวบรวมเครื่องมือทางด้านคลินิกและข้อมูลสนับสนุนการทำงานของเภสัชกร",
-      "links": [
-        {
-          "text": "เปิด Drug Timeline",
-          "url": "https://pharmatoolsthailand.github.io/Homepage/index.html"
-        },
-        {
-          "text": "เปิดคำนวณขนาดยา Warfarin",
-          "url": "https://pharmatoolsthailand.github.io/Homepage/index.html"
-        }
-      ]
-    },
-    {
       "id": "clinical-guideline-browser",
       "folderId": "folderPharmacy",
       "categoryId": "clinical",
@@ -335,6 +316,10 @@
         {
           "text": "เปิด Drug Timeline Tool",
           "url": "https://anupong0620.github.io/Drug-Timeline-Management-Tool/"
+        },
+        {
+          "text": "เปิด Drug Timeline by Endo Pharma",
+          "url": "https://pharmatoolsthailand.github.io/Homepage/index.html"
         }
       ]
     },
@@ -369,6 +354,10 @@
         {
           "text": "Warfarin Double Check",
           "url": "https://anupong0620.github.io/Warfarin-Drug-Checker/"
+        },
+        {
+          "text": "เปิด Warfarin by Endo Pharma",
+          "url": "https://pharmatoolsthailand.github.io/Homepage/index.html"
         }
       ]
     },
@@ -532,11 +521,19 @@
     }
   ];
 
-    // Storage Keys (Bumped to v4 to force update for existing users without needing reset)
+    // Storage Keys
     const STORE_FOLDERS = 'custom:folders:v4';
     const STORE_CATEGORIES = 'custom:categories:v4';
     const STORE_CARDS = 'custom:cards:v4';
     const STORE_THEME = 'projectGridTheme';
+
+    // Explicit DOM Element References
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const categoryFilters = document.getElementById('categoryFilters');
+    const clearAllFiltersBtn = document.getElementById('clearAllFiltersBtn');
 
     // Application State
     let folders = [];
@@ -554,7 +551,6 @@
     // DATA LOAD & STORAGE MANAGEMENT
     // -----------------------------------------------------------------
     function loadState() {
-      // Force update by removing localstorage keys if using old values to see new default code
       folders = JSON.parse(localStorage.getItem(STORE_FOLDERS)) || defaultFolders;
       categories = JSON.parse(localStorage.getItem(STORE_CATEGORIES)) || defaultCategories;
       cards = JSON.parse(localStorage.getItem(STORE_CARDS)) || defaultCards;
